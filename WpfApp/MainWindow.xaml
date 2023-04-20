@@ -5,27 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid>
         <Label x:Name="Title" Content="КП 6 Закрите хешування" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="48" Panel.ZIndex="1"/>
         <Rectangle x:Name="Title_Background" HorizontalAlignment="Left" Height="68" Margin="0,10,0,0" VerticalAlignment="Top" Width="586" Fill="#FFE3E883"/>
         <Rectangle x:Name="Authors_Background" HorizontalAlignment="Left" Height="68" Margin="617,10,0,0" VerticalAlignment="Top" Width="183" Fill="#FFD0D0D0"/>
         <Label x:Name="BrigadeNumber" Content="Б1" HorizontalAlignment="Left" Margin="624,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="48" Panel.ZIndex="1"/>
         <Label x:Name="Authors" Content="Решетняк Сергій&#xD;&#xA;Жайворонок Катерина&#xD;&#xA;Удод Назар" HorizontalAlignment="Left" Margin="681,21,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="10" Panel.ZIndex="1"/>
-        <ScrollViewer x:Name="ScrollOutput" Margin="390,96,10,40" BorderThickness="50,50,50,50">
+        <ScrollViewer x:Name="ScrollOutput" Margin="192,96,10,40" BorderThickness="50,50,50,50" Height="289.06" MaxHeight="289.06">
             <Border BorderBrush="Black" BorderThickness="1">
-                <TextBlock x:Name="Output" TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" Text="" Height="281" Width="366"/>
+                <TextBlock x:Name="Output" TextWrapping="Wrap" Text="" ScrollViewer.CanContentScroll="True"/>
             </Border>
         </ScrollViewer>
-        <TextBox x:Name="InputSurname" HorizontalAlignment="Left" Margin="229,96,0,0" TextWrapping="Wrap" Text="Input surname" VerticalAlignment="Top" Width="150" TextChanged="Input_TextChanged" Height="24"/>
-        <TextBox x:Name="InputDate" HorizontalAlignment="Left" Margin="229,125,0,0" TextWrapping="Wrap" Text="Input date of birth" VerticalAlignment="Top" Width="150" TextChanged="Input_TextChanged" Height="24"/>
-        <StackPanel x:Name="ControlPanel" Margin="229,163,421,40" Width="{Binding ActualWidth, ElementName=button, Mode=OneWay}">
-            <Button x:Name="button1" Height="50" Width="150" Click="Button_Click" Content="Add" Padding="1,1,1,1" UseLayoutRounding="False" Margin="0,0,0,10"/>
-            <Button Content="Get" Height="50" Width="150" Margin="{Binding Margin, ElementName=button1}"/>
-            <Button x:Name="button" Content="Update" Height="50" Width="150" Margin="{Binding Margin, ElementName=button1}"/>
-            <Button Content="Delete" Height="50" Width="150"/>
+        <TextBox x:Name="InputSurname" HorizontalAlignment="Left" Margin="19,165,0,0" TextWrapping="Wrap" Text="Input surname" VerticalAlignment="Top" Width="150" Height="24"/>
+        <TextBox x:Name="InputDate" HorizontalAlignment="Left" Margin="19,194,0,0" TextWrapping="Wrap" Text="Input date of birth" VerticalAlignment="Top" Width="150" Height="24"/>
+        <StackPanel x:Name="ControlPanel" Margin="19,225,631,39" Width="{Binding ActualWidth, ElementName=Update, Mode=OneWay}">
+            <Button x:Name="Add" Height="30" Width="150" Content="Add" Padding="1,1,1,1" UseLayoutRounding="False" Margin="0,0,0,5" Click="Add_Click"/>
+            <Button x:Name="Get" Content="Get" Height="30" Width="150" Margin="{Binding Margin, ElementName=Add}" Click="Get_Click"/>
+            <Button x:Name="Update" Content="Update" Height="30" Width="150" Margin="{Binding Margin, ElementName=Add}" Click="Update_Click"/>
+            <Button x:Name="Delete" Content="Delete" Height="30" Width="150" Margin="{Binding Margin, ElementName=Add}" Click="Delete_Click"/>
+            <Button x:Name="Print" Content="Print" Height="30" Width="150" Click="Print_Click"/>
         </StackPanel>
         <Label x:Name="Status" Content="Status" HorizontalAlignment="Center" Margin="0,408,0,0" VerticalAlignment="Top" Width="800" Background="#FFC7C7C7"/>
+        <RadioButton x:Name="DoubleHasing" Content="Use Double Hashing" HorizontalAlignment="Left" Margin="20,125,0,0" VerticalAlignment="Top" GroupName="Type" IsChecked="True"/>
+        <RadioButton x:Name="CuckooHashing" Content="Use Cuckoo Hashing" HorizontalAlignment="Left" Margin="19,145,0,0" VerticalAlignment="Top" GroupName="{Binding GroupName, ElementName=DoubleHasing}"/>
+        <TextBox x:Name="InputLength" HorizontalAlignment="Left" Margin="19,96,0,0" TextWrapping="Wrap" Text="Input table length" VerticalAlignment="Top" Width="150" Height="24"/>
+        <Button x:Name="Run" Content="&gt;" HorizontalAlignment="Left" Margin="152,125,0,0" VerticalAlignment="Top" Width="18" RenderTransformOrigin="-0.476,0.321" Height="35" Click="Run_Click"/>
 
     </Grid>
 </Window>
