@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,42 +55,48 @@ namespace WpfApp
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 controller.Set(InputSurname.Text, DateTime.Parse(InputDate.Text));
+                sw.Stop();
             }
             catch (Exception ex)
             {
+                sw.Stop();
                 Status.Background = Brushes.OrangeRed;
-                Status.Content = ex.Message;
+                Status.Content = ex.Message + sw.Elapsed.TotalSeconds + "s.";
                 return;
             }
 
             Status.Background = Brushes.DarkGreen;
-            Status.Content = "Created";
+            Status.Content = "Created;" + sw.Elapsed.TotalSeconds + "s."; ;
         }
 
         private void Get_Click(object sender, RoutedEventArgs e)
         {
             SurnameBirthData entity;
-
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 entity = controller.Get(InputSurname.Text);
+                sw.Stop();
             }
             catch (Exception ex)
             {
+                sw.Stop();
                 Status.Background = Brushes.OrangeRed;
-                Status.Content = ex.Message;
+                Status.Content = ex.Message + sw.Elapsed.TotalSeconds + "s.";
                 return;
             }
 
             Status.Background = Brushes.DarkGreen;
-            Status.Content = $"Found entity {entity.surname} with {entity.dateOfBirth} date;";
+            Status.Content = $"Found entity {entity.surname} with {entity.dateOfBirth} date;" + sw.Elapsed.TotalSeconds + "s."; ;
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 controller.Update(InputSurname.Text, DateTime.Parse(InputDate.Text));
@@ -97,16 +104,17 @@ namespace WpfApp
             catch (Exception ex)
             {
                 Status.Background = Brushes.OrangeRed;
-                Status.Content = ex.Message;
+                Status.Content = ex.Message + sw.Elapsed.TotalSeconds + "s.";
                 return;
             }
 
             Status.Background = Brushes.DarkGreen;
-            Status.Content = "Updated";
+            Status.Content = "Updated;" + sw.Elapsed.TotalSeconds + "s."; ;
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 controller.Delete(InputSurname.Text);
@@ -114,12 +122,12 @@ namespace WpfApp
             catch (Exception ex)
             {
                 Status.Background = Brushes.OrangeRed;
-                Status.Content = ex.Message;
+                Status.Content = ex.Message + sw.Elapsed.TotalSeconds + "s.";
                 return;
             }
 
             Status.Background = Brushes.DarkGreen;
-            Status.Content = "Deleted";
+            Status.Content = "Deleted;" + sw.Elapsed.TotalSeconds + "s.";
         }
 
         private void Print_Click(object sender, RoutedEventArgs e)
@@ -130,7 +138,8 @@ namespace WpfApp
             }
             catch (Exception ex)
             {
-
+                Status.Background = Brushes.OrangeRed;
+                Status.Content = ex.Message;
                 return;
             }
         }
