@@ -26,8 +26,8 @@ namespace ТА6.Classes
 
                 indexerHolder = indexerHolder != h1 ? h1 : h2;
                 var memory = holder;
-                holder = table[h1];
-                table[h1] = memory;
+                holder = table[indexerHolder];
+                table[indexerHolder] = memory;
             }
             throw new HTFullExeption();
         }
@@ -35,10 +35,13 @@ namespace ТА6.Classes
         {
             int h1 = DividingHF1(Translate(data.surname));
             int h2 = DividingHF2(Translate(data.surname));
-            if (table[h1].surname == data.surname)
-            { index = h1; return table[index]; }
-            if (table[h2].surname == data.surname)
-            { index = h2; return table[index]; }
+            for (int i = 0; i < table.Length; i++)
+            {
+                if (table[h1].surname == data.surname)
+                { index = h1; return table[index]; }
+                if (table[h2].surname == data.surname)
+                { index = h2; return table[index]; }
+            }
             throw new HTNotFoundExeption();
         }
     }
